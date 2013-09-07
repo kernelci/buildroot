@@ -1,0 +1,8 @@
+#!/bin/sh
+
+case $1 in
+	start|"")
+		mount -t debugfs none /sys/kernel/debug
+		ln -s /sys/kernel/debug /debug
+		;;
+esac
