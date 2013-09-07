@@ -1,0 +1,9 @@
+#!/bin/sh
+
+case $1 in
+	start|"")
+		if [ -e /proc/net/pnp ]; then
+			cat /proc/net/pnp >> /etc/resolv.conf
+		fi
+		;;
+esac
