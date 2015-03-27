@@ -1,0 +1,26 @@
+#!/bin/bash
+D=$(dirname $0)
+
+rm .config
+make defconfig
+
+FRAGMENTS=()
+if [[ $1 =~ ^arm.* ]]; then
+  FRAGMENTS+=("arm")
+fi
+  
+FRAGMENTS+=("$*")
+FRAGMENTS+=("packages")
+echo ${FRAGMENTS[@]}
+for frag in ${FRAGMENTS[@]}; do
+  if [ -e $D/$frag.config ]; then
+    cat $D/$frag.config >> .config
+  else
+    echo "WARNING: $D/$frag.config doesn't exist"
+  fi
+done
+
+# reconfigure with new fragments appended
+yes "" | make oldconfig
+
+make
