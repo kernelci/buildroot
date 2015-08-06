@@ -8,9 +8,17 @@ FRAGMENTS=()
 if [[ $1 =~ ^arm.* ]]; then
   FRAGMENTS+=("arm")
 fi
-  
+
+if [ ! -z $2 ]; then
+  if [[ "$2" != "testimage" ]]; then
+    echo "The second \"$2\" argument didn't match name \"testimage\"!"
+    exit 0
+  fi
+fi
+
 FRAGMENTS+=("$*")
 FRAGMENTS+=("packages")
+[[ "$2" == "testimage" ]] && FRAGMENTS+=("testpackages")
 echo ${FRAGMENTS[@]}
 for frag in ${FRAGMENTS[@]}; do
   if [ -e $D/$frag.config ]; then
