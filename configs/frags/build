@@ -10,7 +10,7 @@ if [[ $1 =~ ^arm.* ]]; then
 fi
   
 FRAGMENTS+=("$*")
-FRAGMENTS+=("packages")
+FRAGMENTS+=("base")
 echo ${FRAGMENTS[@]}
 for frag in ${FRAGMENTS[@]}; do
   if [ -e $D/$frag.config ]; then
