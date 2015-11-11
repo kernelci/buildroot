@@ -16,7 +16,8 @@ for frag in ${FRAGMENTS[@]}; do
   if [ -e $D/$frag.config ]; then
     cat $D/$frag.config >> .config
   else
-    echo "WARNING: $D/$frag.config doesn't exist"
+    echo "WARNING: $D/$frag.config doesn't exist.  Giving up."
+    exit 1
   fi
 done
 
