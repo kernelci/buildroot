@@ -25,3 +25,12 @@ done
 yes "" | make oldconfig
 
 make
+
+# remove uncompressed versions of rootfs 
+(cd output/images; rm -f rootfs.cpio rootfs.tar)
+
+if [ $? = 0 ]; then
+    echo "Packaging up output/host directory"
+    tar -C output/host -Jcf output/images/host.tar.xz .
+    (cd output/images; md5sum host.tar.xz > host.tar.xz.md5)
+fi
