@@ -22,7 +22,7 @@ for frag in ${FRAGMENTS[@]}; do
 done
 
 # reconfigure with new fragments appended
-yes "" | make oldconfig
+make olddefconfig
 
 make
 
