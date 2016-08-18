@@ -10,10 +10,12 @@ if [[ $1 =~ ^arm.* ]]; then
 fi
   
 FRAGMENTS+=("$*")
+#FRAGMENTS+=("min")
 FRAGMENTS+=("base")
 echo ${FRAGMENTS[@]}
 for frag in ${FRAGMENTS[@]}; do
   if [ -e $D/$frag.config ]; then
+    echo "INFO: Including fragment: $frag"
     cat $D/$frag.config >> .config
   else
     echo "WARNING: $D/$frag.config doesn't exist.  Giving up."
