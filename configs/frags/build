@@ -34,7 +34,7 @@ if [ $RESULT != 0 ]; then
 fi
 
 # remove uncompressed versions of rootfs 
-(cd output/images; rm -f rootfs.cpio rootfs.tar)
+(cd output/images; rm -f rootfs.cpio rootfs.tar rootfs.ext2)
 
 if [ $? = 0 ]; then
     echo "Packaging up output/host directory"
