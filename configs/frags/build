@@ -28,6 +28,11 @@ make olddefconfig
 
 make
 
+RESULT=$?
+if [ $RESULT != 0 ]; then
+    exit $RESULT
+fi
+
 # remove uncompressed versions of rootfs 
 (cd output/images; rm -f rootfs.cpio rootfs.tar)
 
