@@ -9,9 +9,9 @@ if [[ $1 =~ ^arm.* ]]; then
   FRAGMENTS+=("arm")
 fi
   
-FRAGMENTS+=("$*")
-#FRAGMENTS+=("min")
 FRAGMENTS+=("base")
+FRAGMENTS+=("$*") # ensure passed-in frags override base
+
 echo ${FRAGMENTS[@]}
 for frag in ${FRAGMENTS[@]}; do
   if [ -e $D/$frag.config ]; then
