@@ -1,0 +1,4 @@
+config BR2_PACKAGE_BOOTRR
+	bool "bootrr"
+	help
+	  The bootrr test scripts.
