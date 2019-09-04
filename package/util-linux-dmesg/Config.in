@@ -1,0 +1,5 @@
+config BR2_PACKAGE_UTIL_LINUX_DMESG
+	bool "util-linux-dmesg"
+	depends on !BR2_PACKAGE_UTIL_LINUX_BINARIES
+	help
+	  The dmesg utility from util-linux.
