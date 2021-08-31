@@ -41,3 +41,5 @@ if [ $? = 0 ]; then
     tar -C output/host -Jcf output/images/host.tar.xz .
     (cd output/images; md5sum host.tar.xz > host.tar.xz.md5)
 fi
+
+cp .config output/images/config
