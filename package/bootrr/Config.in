@@ -1,4 +1,5 @@
 config BR2_PACKAGE_BOOTRR
 	bool "bootrr"
+	depends on BR2_PACKAGE_TPM2_TOOLS
 	help
 	  The bootrr test scripts.
