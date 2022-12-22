@@ -5,7 +5,7 @@
 ################################################################################
 
 BOOTRR_SITE = https://github.com/kernelci/bootrr.git
-BOOTRR_VERSION = ca7526bdc0a13753d6940960a1a3be74a5b76f32
+BOOTRR_VERSION = 94dbf0b19d6e01489ce71c98cd3613b63c15f661
 BOOTRR_SITE_METHOD = git
 BOOTRR_LICENSE = LGPL-2.1+
 
