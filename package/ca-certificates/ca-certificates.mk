@@ -4,9 +4,9 @@
 #
 ################################################################################
 
-CA_CERTIFICATES_VERSION = 20260223
+CA_CERTIFICATES_VERSION = 20260816+nmu1
 CA_CERTIFICATES_SOURCE = ca-certificates_$(CA_CERTIFICATES_VERSION).tar.xz
-CA_CERTIFICATES_SITE = https://snapshot.debian.org/archive/debian/20260223T202245Z/pool/main/c/ca-certificates
+CA_CERTIFICATES_SITE = https://deb.debian.org/debian/pool/main/c/ca-certificates
 CA_CERTIFICATES_DEPENDENCIES = host-openssl host-python3
 HOST_CA_CERTIFICATES_DEPENDENCIES = host-openssl host-python3
 CA_CERTIFICATES_LICENSE = GPL-2.0+ (script), MPL-2.0 (data)
@@ -17,6 +17,7 @@ define CA_CERTIFICATES_BUILD_CMDS
 endef
 
 define CA_CERTIFICATES_INSTALL_TARGET_CMDS
+	rm -rf $(TARGET_DIR)/usr/share/ca-certificates/mozilla
 	$(INSTALL) -d -m 0755 $(TARGET_DIR)/usr/share/ca-certificates
 	$(INSTALL) -d -m 0755 $(TARGET_DIR)/etc/ssl/certs
 	$(TARGET_MAKE_ENV) $(MAKE) -C $(@D) install DESTDIR=$(TARGET_DIR)
@@ -49,9 +50,14 @@ define HOST_CA_CERTIFICATES_BUILD_CMDS
 endef
 
 define HOST_CA_CERTIFICATES_INSTALL_CMDS
+	rm -rf $(HOST_DIR)/share/ca-certificates/mozilla
+	# Remove the misplaced certificates left by older host package installs.
+	# check-package ignore DoNotInstallToHostdirUsr
+	rm -rf $(HOST_DIR)/usr/share/ca-certificates/mozilla
 	$(INSTALL) -d -m 0755 $(HOST_DIR)/share/ca-certificates
 	$(INSTALL) -d -m 0755 $(HOST_DIR)/etc/ssl/certs
-	$(HOST_MAKE_ENV) $(MAKE) -C $(@D) install DESTDIR=$(HOST_DIR)
+	$(HOST_MAKE_ENV) $(MAKE) -C $(@D) install DESTDIR=$(HOST_DIR) \
+		CERTSDIR=/share/ca-certificates SBINDIR=/sbin
 	rm -f $(HOST_DIR)/sbin/update-ca-certificates
 	# Remove any existing certificates under /etc/ssl/certs
 	rm -f $(HOST_DIR)/etc/ssl/certs/*
